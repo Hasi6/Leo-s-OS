@@ -13,12 +13,12 @@ then
 fi
 
 
-echo ">>> Assembling bootloader..."
+echo ">>> Assembling leos OS bootloader..."
 
 nasm -O0 -w+orphan-labels -f bin -o source/bootload/bootload.bin source/bootload/bootload.asm || exit
 
 
-echo ">>> Assembling Dilz OS kernel..."
+echo ">>> Assembling Leos OS kernel..."
 
 cd source
 nasm -O0 -w+orphan-labels -f bin -o kernel.bin kernel.asm || exit
@@ -31,7 +31,7 @@ echo ">>> Adding bootloader to floppy image..."
 dd status=noxfer conv=notrunc if=source/bootload/bootload.bin of=disk_images/leo_OS.flp || exit
 
 
-echo ">>> Copying Dilz_Os kernel and programs..."
+echo ">>> Copying Leos OS kernel and programs..."
 
 rm -rf tmp-loop
 
@@ -51,7 +51,7 @@ rm -rf tmp-loop
 echo ">>> Creating CD-ROM ISO image..."
 
 rm -f disk_images/leo_OS.iso
-mkisofs -quiet -V 'Dilz OS' -input-charset iso8859-1 -o disk_images/leo_OS.iso -b leo_OS.flp disk_images/ || exit
+mkisofs -quiet -V 'Leo OS' -input-charset iso8859-1 -o disk_images/leo_OS.iso -b leo_OS.flp disk_images/ || exit
 
 echo '>>> Done!'
 
